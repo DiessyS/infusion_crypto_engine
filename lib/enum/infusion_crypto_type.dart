@@ -18,13 +18,13 @@ enum InfusionCryptoType {
   String label() {
     switch (this) {
       case InfusionCryptoType.chaCha20:
-        return 'ChaCha20';
+        return InfusionCryptoType.chaCha20.name;
       case InfusionCryptoType.aesGcm128:
-        return 'AES-GCM 128';
+        return InfusionCryptoType.aesGcm128.name;
       case InfusionCryptoType.aesGcm192:
-        return 'AES-GCM 192';
+        return InfusionCryptoType.aesGcm192.name;
       case InfusionCryptoType.aesGcm256:
-        return 'AES-GCM 256';
+        return InfusionCryptoType.aesGcm256.name;
     }
   }
 }
