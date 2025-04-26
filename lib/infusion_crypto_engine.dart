@@ -11,13 +11,15 @@ class InfusionCryptoEngine extends InfusionCryptoChannel {
   }
 
   Future<Uint8List> encrypt(
-      Uint8List data, Uint8List iv, Uint8List derivedKey) async {
+    Uint8List data,
+    Uint8List iv,
+    Uint8List derivedKey,
+  ) async {
     final SecretBox encrypted = await cryptoEngine.encrypt(
       data,
       secretKey: SecretKey(derivedKey as List<int>),
       nonce: iv,
     );
-    derivedKey.fillRange(0, derivedKey.length, 0);
     return encrypted.concatenation();
   }
 
@@ -31,7 +33,6 @@ class InfusionCryptoEngine extends InfusionCryptoChannel {
       box,
       secretKey: SecretKey(derivedKey as List<int>),
     ) as Uint8List;
-    derivedKey.fillRange(0, derivedKey.length, 0);
     return decrypted;
   }
 
