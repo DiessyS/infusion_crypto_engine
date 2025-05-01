@@ -1,10 +1,11 @@
 name: infusion_crypto_engine
 description: "A new Flutter project."
+publish_to: none
 version: 0.0.1
 homepage:
 
 environment:
-  sdk: '>=3.2.6 <4.0.0'
+  sdk: '3.4.0'
   flutter: ">=1.17.0"
 
 dependencies:
