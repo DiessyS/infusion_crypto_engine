@@ -9,7 +9,7 @@ enum InfusionCryptoType {
 
   const InfusionCryptoType(this.name, this.id);
 
-  static InfusionCryptoType fromId(int id) {
+  static InfusionCryptoType fromId(int? id) {
     return InfusionCryptoType.values.firstWhere(
       (type) => type.id == id,
       orElse: () => InfusionCryptoType.chaCha20,
