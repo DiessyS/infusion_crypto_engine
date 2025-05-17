@@ -1,16 +1,17 @@
 enum InfusionCryptoType {
-  chaCha20('ChaCha20'),
-  aesGcm128('AES-GCM-128'),
-  aesGcm192('AES-GCM-192'),
-  aesGcm256('AES-GCM-256');
+  chaCha20('ChaCha20', 0),
+  aesGcm128('AES-GCM-128', 1),
+  aesGcm192('AES-GCM-192', 2),
+  aesGcm256('AES-GCM-256', 3);
 
   final String name;
+  final int id;
 
-  const InfusionCryptoType(this.name);
+  const InfusionCryptoType(this.name, this.id);
 
-  static InfusionCryptoType fromString(String value) {
+  static InfusionCryptoType fromId(int id) {
     return InfusionCryptoType.values.firstWhere(
-      (type) => type.name == value,
+      (type) => type.id == id,
       orElse: () => InfusionCryptoType.chaCha20,
     );
   }
