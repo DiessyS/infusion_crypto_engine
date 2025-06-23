@@ -17,7 +17,7 @@ class InfusionCryptoEngine extends InfusionCryptoChannel {
   ) async {
     final SecretBox encrypted = await cryptoEngine.encrypt(
       data,
-      secretKey: SecretKey(derivedKey as List<int>),
+      secretKey: SecretKey(derivedKey),
       nonce: iv,
     );
     return encrypted.concatenation();
@@ -28,12 +28,15 @@ class InfusionCryptoEngine extends InfusionCryptoChannel {
       data,
       nonceLength: cryptoEngine.nonceLength,
       macLength: cryptoEngine.macAlgorithm.macLength,
+      copy: false,
     );
-    final Uint8List decrypted = await cryptoEngine.decrypt(
-      box,
-      secretKey: SecretKey(derivedKey as List<int>),
-    ) as Uint8List;
-    return decrypted;
+
+    return Uint8List.fromList(
+      await cryptoEngine.decrypt(
+        box,
+        secretKey: SecretKey(derivedKey),
+      ),
+    );
   }
 
   int getAlgorithmEngineCode() {
