@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:cryptography/helpers.dart';
-import 'package:cryptography_flutter/cryptography_flutter.dart';
+import 'package:cryptography_flutter_plus/cryptography_flutter_plus.dart';
+import 'package:cryptography_plus/helpers.dart';
 import 'package:infusion_crypto_engine/enum/infusion_crypto_type.dart';
 
 class InfusionCryptoChannel {

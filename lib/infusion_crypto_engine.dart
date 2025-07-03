@@ -1,6 +1,6 @@
 library infusion_crypto_engine;
 
-import 'package:cryptography/cryptography.dart';
+import 'package:cryptography_plus/cryptography_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:infusion_crypto_engine/infusion_crypto_channel.dart';
 import 'package:infusion_crypto_engine/enum/infusion_crypto_type.dart';

@@ -5,15 +5,15 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: '>=3.3.0 <=3.7.2'
+  sdk: '>=3.3.0 <=3.8.1'
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  cryptography: ^2.5.0
-  cryptography_flutter: ^2.3.0
+  cryptography_plus: ^2.7.0
+  cryptography_flutter_plus: ^2.3.2
 
 dev_dependencies:
   flutter_test:
