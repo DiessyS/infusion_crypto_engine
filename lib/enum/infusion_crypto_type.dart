@@ -1,8 +1,8 @@
 enum InfusionCryptoType {
-  chaCha20('ChaCha20', 0),
-  aesGcm128('AES-GCM-128', 1),
-  aesGcm192('AES-GCM-192', 2),
-  aesGcm256('AES-GCM-256', 3);
+  chaCha20('ChaCha20', 0xe97bed2),
+  aesGcm128('AES-GCM-128', 0x56050b),
+  aesGcm192('AES-GCM-192', 0x8b0f6b),
+  aesGcm256('AES-GCM-256', 0xfa80b5);
 
   final String name;
   final int id;

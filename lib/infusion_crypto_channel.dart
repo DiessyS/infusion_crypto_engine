@@ -37,6 +37,10 @@ class InfusionCryptoChannel {
     return _cryptoEngine.secretKeyLength;
   }
 
+  InfusionCryptoType getCryptoType() {
+    return _cryptoType;
+  }
+
   Uint8List generateIV() {
     return randomBytes(_cryptoEngine.nonceLength);
   }

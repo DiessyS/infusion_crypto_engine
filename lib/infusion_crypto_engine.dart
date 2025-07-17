@@ -38,8 +38,4 @@ class InfusionCryptoEngine extends InfusionCryptoChannel {
       ),
     );
   }
-
-  int getAlgorithmEngineCode() {
-    return cryptoEngine.channelCipherName.hashCode;
-  }
 }

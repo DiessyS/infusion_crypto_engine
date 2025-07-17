@@ -32,4 +32,15 @@ void main() {
       expect(channel.getCryptoEngineKeyLength(), 32);
     });
   });
+
+  test('InfusionCryptoChannel - getCryptoType', () {
+    final channel = InfusionCryptoChannel();
+    expect(channel.getCryptoType(), InfusionCryptoType.chaCha20);
+  });
+
+  test('InfusionCryptoChannel - getCryptoType after setting AES-GCM-128', () {
+    final channel = InfusionCryptoChannel();
+    channel.setCryptoEngine(InfusionCryptoType.aesGcm128);
+    expect(channel.getCryptoType(), InfusionCryptoType.aesGcm128);
+  });
 }
