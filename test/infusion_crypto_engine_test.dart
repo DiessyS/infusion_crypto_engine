@@ -1,34 +1,45 @@
+import 'dart:math';
+
 import 'package:cryptography_flutter_plus/cryptography_flutter_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:infusion_crypto_engine/enum/infusion_crypto_type.dart';
 import 'package:infusion_crypto_engine/infusion_crypto_channel.dart';
 import 'package:infusion_crypto_engine/infusion_crypto_engine.dart';
+import 'package:infusion_crypto_engine/models/crypto_attributes.dart';
+import 'package:infusion_crypto_engine/models/encryption_parts.dart';
 
 void main() {
   group('InfusionCryptoEngine Tests', () {
+    Uint8List generateRandomData(int length) {
+      Random random = Random();
+      return Uint8List.fromList(
+          List.generate(length, (_) => random.nextInt(256)));
+    }
+
     Future<bool> helperTestEncryptionAndDecryption(
       InfusionCryptoType type,
       Uint8List data,
     ) async {
       final channel = InfusionCryptoEngine(type);
-      final iv = channel.generateIV();
-      final derivedKey = Uint8List.fromList(
-        List.generate(channel.cryptoEngine.secretKeyLength, (index) => index),
-      );
-      final data = Uint8List.fromList(
-        List.generate(20, (index) => index),
+      final Uint8List data = generateRandomData(32);
+      final CryptoAttributes attributes = CryptoAttributes(
+        data: data,
+        iv: channel.generateIV(),
+        derivedKey: generateRandomData(channel.cryptoEngine.secretKeyLength),
+        aad: generateRandomData(8),
       );
 
-      final Uint8List encryptedData = await channel.encrypt(
-        data,
-        iv,
-        derivedKey,
+      final Uint8List encryptedData = await channel.encrypt(attributes);
+
+      final CryptoAttributes attributesEncrypt = CryptoAttributes(
+        data: encryptedData,
+        iv: attributes.iv,
+        derivedKey: attributes.derivedKey,
+        aad: attributes.aad,
       );
-      final Uint8List decryptedData = await channel.decrypt(
-        encryptedData,
-        derivedKey,
-      );
+
+      final Uint8List decryptedData = await channel.decrypt(attributesEncrypt);
 
       return listEquals(decryptedData, data);
     }
@@ -102,6 +113,24 @@ void main() {
         ),
         true,
       );
+    });
+
+    test('InfusionCryptoEngine - splitEncryptionParts', () async {
+      final channel = InfusionCryptoEngine(InfusionCryptoType.aesGcm256);
+      final Uint8List data = generateRandomData(32);
+      final CryptoAttributes attributes = CryptoAttributes(
+        data: data,
+        iv: channel.generateIV(),
+        derivedKey: generateRandomData(channel.cryptoEngine.secretKeyLength),
+        aad: generateRandomData(8),
+      );
+
+      final Uint8List encryptedData = await channel.encrypt(attributes);
+      final EncryptionParts parts = channel.splitEncryptionParts(encryptedData);
+
+      expect(parts.nonce, attributes.iv);
+      expect(parts.cipherText, isNotEmpty);
+      expect(parts.mac, isNotEmpty);
     });
   });
 }
