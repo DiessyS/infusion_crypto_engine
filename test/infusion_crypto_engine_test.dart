@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:cryptography_flutter_plus/cryptography_flutter_plus.dart';
+import 'package:cryptography_flutter/cryptography_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:infusion_crypto_engine/enum/infusion_crypto_type.dart';
