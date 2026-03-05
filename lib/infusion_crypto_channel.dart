@@ -44,4 +44,8 @@ class InfusionCryptoChannel {
   Uint8List generateIV() {
     return randomBytes(_cryptoEngine.nonceLength);
   }
+
+  Uint8List generateSecureRandomBytes(int length) {
+    return randomBytes(length);
+  }
 }

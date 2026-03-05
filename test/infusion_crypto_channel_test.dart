@@ -43,4 +43,18 @@ void main() {
     channel.setCryptoEngine(InfusionCryptoType.aesGcm128);
     expect(channel.getCryptoType(), InfusionCryptoType.aesGcm128);
   });
+
+  test('InfusionCryptoChannel - generateIV returns correct length', () {
+    final channel = InfusionCryptoChannel();
+    final iv = channel.generateIV();
+    expect(iv.length, channel.cryptoEngine.nonceLength);
+  });
+
+  test(
+      'InfusionCryptoChannel - generateSecureRandomBytes returns correct length',
+      () {
+    final channel = InfusionCryptoChannel();
+    final randomBytes = channel.generateSecureRandomBytes(16);
+    expect(randomBytes.length, 16);
+  });
 }
